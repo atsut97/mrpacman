@@ -1,37 +1,47 @@
-# Mr. Pacman
+# Mr. Pac-Man
 
 Rudimentary and simple package manager utility for my personal use.
 
+I have got an idea of the name from PAC-MAN™, ©1980 BANDAI NAMCO
+Entertainment Inc.
+
 ## Description
 
-`mrpacman` is a Bash script to manage packages that is locally
-installed on the system for my personal use. I believe packages should
-basically be managed by the default package manager on the system, but
-I sometimes need to keep a program or library the latest version. In
-such a case, however, updating programs and libraries to the latest at
-all times is very bothersome and annoying. This script manages
-packages installed on the system and collects instructios how to
-install and update software, so it makes it easy to keep them up with
-the latest.
+Mr. Pac-Man, or `mrpacman`, is acronyms for "My Rudimentary PACkage
+MANager" and yet "ManageR of PACkage MANager". It is a Bash script to
+manage packages and modules that are installed locally on the system
+for my personal use. I believe packages should basically be managed by
+the default package manager on the system, but I need keep some
+programs and libraries the latest versions that are not available in
+the repository of the default package manager. For those packages, I
+have to delegate management of them to alternative package/module
+managers such as `pip`, `go modules`, `yarn`, `cabal` and `cargo`, or
+I cannot help but manage and install them manually. In such cases
+updating them to the latest at all times by hand is very bothersome
+and annoying. This script manages packages installed manually on the
+system, collects instructions how to install and update packages and
+executes commands of delegated package managers so that it makes it
+easy to keep up packages on the system to the latest.
 
 ## Examples
 
 ``` shell
-pacman -Ss tmux
+mrpacman -Ss tmux
 ```
 Search for regexp "tmux" in package database.
 
 ``` shell
-pacman -S emacs
+mrpacman -S emacs
 ```
-Download and install emacs including dependencies.
+Download and install `emacs` including dependencies.
 
 ``` shell
-pacman -Syu
+mrpacman -Syu
 ```
 Update package list and upgrade all packages afterwards.
 
 ``` shell
-pacman -Syu emacs
+mrpacman -Syu emacs
 ```
-Update package list, upgrade all packages, and then install emacs if it wasn’t already installed.
+Update package list, upgrade all packages, and then install `emacs` if
+it wasn’t already installed.
