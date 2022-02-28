@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+
+
+name="$(basename "${BASH_SOURCE[0]}")"
+self="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)/$name"
+export MRPACMAN_NAME="$name"
+export MRPACMAN_SELF="$self"
+export MRPACMAN_ROOT="${MRPACMAN_SELF%/*}"
+export MRPACMAN_VERSION="0.0.1"
+
+usage() {
+  cat <<EOF
+NAME:
+  $name - my rudimentary package manager
+
+SYNOPSIS:
+  $0 [--help] <command> [<args>]
+
+DESCRIPTION:
+
+  Mr. Pac-Man, or mrpacman, is a rudimentary and simple package
+  manager utility for my personal use.
+
+  Its name is inspired by the eminent arcade game, Pac-Man, released
+  by Namco in 1980.
+
+  It provides functions to install and update packages according to
+  build instructions, resolve dependencies automatically, remove
+  packages installed on the system, show information on available
+  packages and so on.
+
+OPTIONS:
+  -v, --version
+    Prints the Mr. Pac-Man version.
+
+  -h, --help
+    Prints the synopsis and a list of the most useful commands.
+
+COMMANDS:
+  install
+    Build packages if needed and install them on the local system.
+
+  update
+    Update packages if newer version available.
+
+  remove
+    Remove installed packages.
+
+  show
+    Show detailed information of packages.
+EOF
+}
+
+version() {
+  echo "$name version 0.0.1"
+}
+
+args=()
+parse() {
+  while (( "$#" )); do
+    case "$1" in
+      -v|--version)
+        version
+        exit 0
+        ;;
+      -h|--help)
+        usage
+        exit 0
+        ;;
+      -*)
+        echo "error: unknown options $1" >&2
+        exit 1
+        ;;
+      *)
+        args+=("$1")
+        shift
+        ;;
+    esac
+  done
+}
+
+# Main processes.
+main() {
+  # Parse optional arguments.
+  parse "$@"
+
+  # Provided no arguments.
+  if [[ ${#args[@]} -eq 0 ]]; then
+    usage
+    exit 1
+  fi
+}
+
+if [[ "${BASH_SOURCE[0]}" -ef "$0" ]]; then
+  main "$@"
+fi
